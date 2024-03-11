@@ -1,5 +1,5 @@
 import random
-
+import time
 
 def generation_list(size):
     list = []
@@ -8,9 +8,12 @@ def generation_list(size):
     return list
 
 def search_index(list, number):
+    start_time = time.perf_counter()
     for i in range(len(list)):
         if list[i] == number:
-            return i
+            end_time = time.perf_counter()
+            total_time = (end_time - start_time) * 1000
+            return i, total_time
     return 'Нет данного числа'
 
 def deleted_el(lisr, element):

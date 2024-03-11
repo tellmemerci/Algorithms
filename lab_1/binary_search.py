@@ -1,13 +1,16 @@
 import random
-
+import time
 def binary_search(list, item):
+    start_time = time.perf_counter()
     low = 0
     high = len(list) - 1
     while low <= high:
         mid = (low + high) // 2
         guess = list[mid]
         if guess == item:
-            return mid
+            end_time = time.perf_counter()
+            total_time = (end_time - start_time) * 1000
+            return mid, total_time
         if guess > item:
             high = mid - 1
         else:
