@@ -41,8 +41,25 @@ def delete_element(list, element):
     return list
 
 
-def insert_el(list, element):
-    pass
+def insert_element(list, element):
+    start_time = time.perf_counter()
+    low = 0
+    high = len(list) - 1
+    while low <= high:
+        mid = (low + high) // 2
+        if list[mid] < element:
+            low = mid + 1
+        elif list[mid] > element:
+            high = mid - 1
+        else:
+            list.insert(mid, element)
+            end_time = time.perf_counter()
+            total_time = (end_time - start_time) * 1000
+            return list, total_time
+
+    list.insert(low, element)
+    return list
+
 
 
 size = int(input('Введите размер случайного массива: '))
@@ -53,3 +70,5 @@ print('Номер вашего элемента:', binary_search(list, digit))
 print(list)
 element = int(input('Введите число, которое хотите удалить: '))
 print('Ваш массив ', delete_element(list, element))
+element = int(input('Напишите число, которое хотите вставить: '))
+print('Ваш массив: ', insert_element(list, element))
