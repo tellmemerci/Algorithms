@@ -26,6 +26,7 @@ def generation_list(size):
     return list
 
 def delete_element(list, element):
+    start_time = time.perf_counter()
     index = 0
     while index < len(list):
         if list[index] == element:
@@ -33,12 +34,16 @@ def delete_element(list, element):
         index += 1
 
     if index == len(list):
-        return list
+        end_time = time.perf_counter()
+        total_time = (end_time - start_time) * 1000
+        return list, total_time
 
     for i in range(index, len(list) - 1):
         list[i] = list[i + 1]
     list.pop()
-    return list
+    end_time = time.perf_counter()
+    total_time = (end_time - start_time) * 1000
+    return list, total_time
 
 
 def insert_element(list, element):
@@ -53,12 +58,11 @@ def insert_element(list, element):
             high = mid - 1
         else:
             list.insert(mid, element)
-            end_time = time.perf_counter()
-            total_time = (end_time - start_time) * 1000
-            return list, total_time
-
+            return list
+    end_time = time.perf_counter()
+    total_time = (end_time - start_time) * 1000
     list.insert(low, element)
-    return list
+    return list, total_time
 
 
 

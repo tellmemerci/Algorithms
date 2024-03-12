@@ -16,7 +16,7 @@ def search_index(list, number):
             return i, total_time
     return 'Нет данного числа'
 
-def deleted_el(lisr, element):
+def deleted_el(list, element):
     start_time = time.perf_counter()
     if element in list:
         list.remove(element)
