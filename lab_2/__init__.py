@@ -4,7 +4,7 @@ import time
 def generation_list(size):
     list = []
     for i in range(size):
-        list.append(random.randint(1, 500))
+        list.append(random.randint(0, 100000))
     return list
 
 def sorted_insert(list):
@@ -31,12 +31,12 @@ def sorted_selection(list):
     end_time = time.perf_counter()
     total_time = (end_time - start_time) * 1000
     return list, total_time
-def merge_sort(list):
+def merge_sort(lst):
     start_time = time.perf_counter()
-    if len(list) > 1:
-        mid = len(list)//2
-        left = list[:mid]
-        right = list[mid:]
+    if len(lst) > 1:
+        mid = len(lst) // 2
+        left = lst[:mid]
+        right = lst[mid:]
         merge_sort(left)
         merge_sort(right)
 
@@ -44,42 +44,46 @@ def merge_sort(list):
 
         while i < len(left) and j < len(right):
             if left[i] < right[j]:
-                list[k] = left[i]
-                i+=1
+                lst[k] = left[i]
+                i += 1
             else:
-                list[k] = right[j]
-                j+=1
-            k+=1
+                lst[k] = right[j]
+                j += 1
+            k += 1
 
         while i < len(left):
-            list[k] = left[i]
-            i+=1
-            k+=1
+            lst[k] = left[i]
+            i += 1
+            k += 1
 
         while j < len(right):
-            list[k] = right[j]
-            j+=1
-            k+=1
+            lst[k] = right[j]
+            j += 1
+            k += 1
+
     end_time = time.perf_counter()
     total_time = (end_time - start_time) * 1000
-    return list, total_time
 
-def quick_sort(list):
+    return lst, total_time
+
+def quick_sort(arr):
     start_time = time.perf_counter()
-    if len(list) <= 1:
-        return list
-    else:
-        pivot = list[0]
-        less = [x for x in list[1:] if x <= pivot]
-        greater = [x for x in list[1:] if x > pivot]
-        end_time = time.perf_counter()
-        total_time = (end_time - start_time) * 1000
-        return quick_sort(less) + [pivot] + quick_sort(greater), total_time
+    if len(arr) <= 1:
+        return arr, 0
+    pivot = arr[0]
+    less = [x for x in arr[1:] if x <= pivot]
+    greater = [x for x in arr[1:] if x > pivot]
+    end_time = time.perf_counter()
+    total_time = (end_time - start_time) * 1000
+    sorted_less, less_time = quick_sort(less)
+    sorted_greater, greater_time = quick_sort(greater)
+    return sorted_less + [pivot] + sorted_greater, total_time + less_time + greater_time
 
 size = int(input('Введите размер случайного массива: '))
 list = generation_list(size)
+arr = list
 print('Ваш первоначальный массив: ', list)
 print('Сортировка вставками', sorted_insert(list))
 print('Сортировка выбором: ', sorted_selection(list))
 print('Сортировка слиянием: ', merge_sort(list))
-print('Быстрая сортировка: ', quick_sort(list))
+print('Быстрая сортировка: ', quick_sort(arr))

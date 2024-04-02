@@ -45,7 +45,6 @@ def delete_element(list, element):
     total_time = (end_time - start_time) * 1000
     return list, total_time
 
-
 def insert_element(list, element):
     start_time = time.perf_counter()
     low = 0
@@ -63,9 +62,6 @@ def insert_element(list, element):
     total_time = (end_time - start_time) * 1000
     list.insert(low, element)
     return list, total_time
-
-
-
 size = int(input('Введите размер случайного массива: '))
 list = generation_list(size)
 print('Ваш первоначальный массив: ', list)
