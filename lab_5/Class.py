@@ -88,7 +88,7 @@ class Tree:
             self.__del_one_child(sr, pr)
 
 
-v = [10, 5, 7, 16, 13, 2, 20, 100, 50, -2, 3]
+v = [4, 15, 20, 48, 3, -4, 6, 12]
 t = Tree()
 for x in v:
     t.append(Node(x))
